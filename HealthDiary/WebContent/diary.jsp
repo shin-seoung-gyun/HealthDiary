@@ -13,6 +13,6 @@
 
 <input type="submit" value="등록">
 </form>
-
+<!-- 커밋확인용 -->
 </body>
 </html>
