@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +87,8 @@ public class controller extends HttpServlet {
 			dd.update(vo);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("search2.do");
 			dispatcher.forward(request, response);
+		}else if (action.equals("real.do")) {//템플릿 테스트하는 매서드
+			response.sendRedirect("realindex.jsp");
 			
 		}
 			
