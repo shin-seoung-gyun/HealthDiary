@@ -9,20 +9,19 @@ import java.util.List;
 public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 
 	@Override
-	public List<DiaryListVO> searchDate(DiaryListVO vo) {// 날짜로 일기 리스트 받기
+	public List<DiaryListVO> search() {// 전체 리스트 받기
 		Connection conn = getConnection();// db연결
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 		ResultSet rs = null;// 결과값 받는 객체
 		List<DiaryListVO> volist = new ArrayList<DiaryListVO>();// 받아온 데이터를 담을 객체
 		try {
-			stmt = conn.prepareStatement("select * from diary where indate like ? '%'");
-			stmt.setString(1, vo.getDate());
-			System.out.println(vo.getDate());
+			stmt = conn.prepareStatement("select * from diary");
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				DiaryListVO dvo = new DiaryListVO();
 				dvo.setTitle(rs.getString("title"));
 				dvo.setDate(rs.getString("indate"));
+				dvo.setCondition(rs.getString("condition"));
 				volist.add(dvo);
 			}
 

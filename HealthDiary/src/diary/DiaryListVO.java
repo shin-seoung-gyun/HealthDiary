@@ -1,9 +1,17 @@
 package diary;
 
-public class DiaryListVO {// ³¯ÀÚ·Î °Ë»öÇØ¼­ ³ª¿Â °á°ú¸¦ Á¦¸ñ°ú ³»¿ë, ³¯ÀÚ¸¦ ¿Å±â´Â µ¥ÀÌÅÍ
+public class DiaryListVO {// ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½Ë»ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Å±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private String title;
 	private String contents;
 	private String date;
+	private String Condition;
+	
+	public String getCondition() {
+		return Condition;
+	}
+	public void setCondition(String condition) {
+		Condition = condition;
+	}
 	public String getDate() {
 		return date;
 	}

@@ -4,15 +4,15 @@ import java.util.List;
 
 public interface DiaryDAO {
 
-	List<DiaryListVO> searchDate(DiaryListVO vo);//³¯ÀÚ¸¸ ÀÔ·Â¹Þ¾Æ °Ë»öÇÏ´Â ¸Å¼­µå
+	List<DiaryListVO> search();//ì „ì²´ê²€ìƒ‰
 	
-	DiaryListVO searchDateTime(DiaryListVO vo); //³¯Â¥,½Ã°£À» ÀÔ·Â¹Þ¾Æ °Ë»öÇÏ´Â ¸Å¼­µå
+	DiaryListVO searchDateTime(DiaryListVO vo); //ï¿½ï¿½Â¥,ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½Ô·Â¹Þ¾ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Å¼ï¿½ï¿½ï¿½
 	
-	void update(DiaryListVO vo);//°Ë»öÇÑ ÈÄ ¼öÁ¤ÇÑ ³»¿ëÀ» db·Î º¸³»´Â ¸Å¼­µå
+	void update(DiaryListVO vo);//ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¼ï¿½ï¿½ï¿½
 	
-	void delete(DiaryListVO vo);//°Ë»öÇÑ ÈÄ »èÁ¦ÇÏ´Â  ¸Å¼­µå
+	void delete(DiaryListVO vo);//ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½  ï¿½Å¼ï¿½ï¿½ï¿½
 	
-	void insert(DiaryListVO vo);//»ðÀÔ
+	void insert(DiaryListVO vo);//ï¿½ï¿½ï¿½ï¿½
 	
 }
 

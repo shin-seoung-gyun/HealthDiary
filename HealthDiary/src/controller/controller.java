@@ -53,12 +53,11 @@ public class controller extends HttpServlet {
 			dd.insert(vo);
 			// 다시 등록화면
 			response.sendRedirect("diary.jsp");
-		}else if (action.equals("search.do")) {// 날자로 일기 리스트 가져오기
+			
+		}else if (action.equals("index.do")) {//일기 리스트 가져오기
 			DiaryDAOImpl dd = new DiaryDAOImpl();
-			DiaryListVO vo = new DiaryListVO();
-			vo.setDate(request.getParameter("date"));
-			request.setAttribute("list", dd.searchDate(vo));
-			RequestDispatcher dispatcher = request.getRequestDispatcher("search.jsp");
+			request.setAttribute("list", dd.search());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
 			
 		}else if (action.equals("search2.do")) {//날자 시간으로 내용까지 가져오기

@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 일기 등록하는 jsp입니다 -->
+
 <form action="write.do" method="get">
 제목<br><input type="text" name="title" ><br><br>
 내용 <br><textarea rows=5 cols=50 name="contents"></textarea><br>
