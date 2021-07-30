@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
@@ -758,15 +759,12 @@
                         </span>
                       </td>
                       <td class="px-4 py-3 text-sm">
-                        ${temp.getDate()}
+                      <fmt:parseDate value = "${temp.getDate()}" pattern = "yyyy-MM-dd HH:mm:ss" var = "date"/>
+                      	<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value='${date}' />                        
                       </td>
                     </tr>
 				</c:forEach>
                     
-
-                   
-
-                   
                   </tbody>
                 </table>
               </div>

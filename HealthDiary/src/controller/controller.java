@@ -46,7 +46,6 @@ public class controller extends HttpServlet {
 			// 전송된 값 읽기 등록
 			DiaryListVO vo = new DiaryListVO();
 			vo.setTitle(request.getParameter("title"));
-			vo.setDate(request.getParameter("date"));
 			vo.setContents(request.getParameter("contents"));
 			// 등록
 			DiaryDAOImpl dd = new DiaryDAOImpl();
@@ -54,31 +53,31 @@ public class controller extends HttpServlet {
 			// 다시 등록화면
 			response.sendRedirect("diary.jsp");
 			
-		}else if (action.equals("index.do")) {//일기 리스트 가져오기
+		}else if (action.equals("main.do")) {//일기 리스트 가져오기
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			request.setAttribute("list", dd.search());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 			dispatcher.forward(request, response);
 			
-		}else if (action.equals("search2.do")) {//날자 시간으로 내용까지 가져오기
+		}else if (action.equals("search2.do")) {//날자 시간으로 내용까지 가져오기-수정 예정
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			DiaryListVO vo = new DiaryListVO();
-			vo.setDate(request.getParameter("date"));
+			
 			request.setAttribute("list", dd.searchDateTime(vo));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("search2.jsp");
 			dispatcher.forward(request, response);
 			
-		}else if (action.equals("delete.do")) {// 삭제하기
+		}else if (action.equals("delete.do")) {// 삭제하기-수정예정
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			DiaryListVO vo = new DiaryListVO();
-			vo.setDate(request.getParameter("date"));
+			
 			dd.delete(vo);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("search.jsp");
 			dispatcher.forward(request, response);
-		}else if (action.equals("update.do")) {// 수정하는 매서드
+		}else if (action.equals("update.do")) {// 수정하는 매서드 - 수정예정
 			DiaryListVO vo = new DiaryListVO();
 			vo.setTitle(request.getParameter("title"));
-			vo.setDate(request.getParameter("date"));
+			
 			vo.setContents(request.getParameter("contents"));
 			System.out.println(vo.getDate());
 			// 등록

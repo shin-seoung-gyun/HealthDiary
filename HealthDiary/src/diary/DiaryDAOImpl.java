@@ -3,6 +3,7 @@ package diary;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 		DiaryListVO dvo = new DiaryListVO();
 		try {
 			stmt = conn.prepareStatement("select * from diary where indate = ?");
-			stmt.setString(1, vo.getDate());
+//			stmt.setDate(1, vo.getDate()); 날짜가 아닌 번호나 다른 것으로 검색하게 수정할 예정
 			rs = stmt.executeQuery();
 			rs.next();
 			dvo.setTitle(rs.getString("title"));
@@ -64,9 +65,8 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 
 		try {
-			stmt = conn.prepareStatement("UPDATE DIARY SET TITLE = ?, CONTENTS = ?,indate= ? WHERE indate=?");
-			stmt.setString(4, vo.getDate());
-			stmt.setString(3, vo.getDate());
+			stmt = conn.prepareStatement("UPDATE DIARY SET TITLE = ?, CONTENTS = ? WHERE ??");//수정예정
+			
 			stmt.setString(1, vo.getTitle());
 			stmt.setString(2, vo.getContents());
 			stmt.executeUpdate();
@@ -85,8 +85,8 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 
 		try {
-			stmt = conn.prepareStatement("delete from diary where indate=?");
-			stmt.setString(1, vo.getDate());
+			stmt = conn.prepareStatement("delete from diary where indate=?");//여기도 수정
+//			stmt.setDate(1, vo.getDate()); 번호로 삭제할 예정
 
 			stmt.executeUpdate();
 
