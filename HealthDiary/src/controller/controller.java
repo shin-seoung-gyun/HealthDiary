@@ -55,7 +55,14 @@ public class controller extends HttpServlet {
 			
 		}else if (action.equals("main.do")) {//일기 리스트 가져오기
 			DiaryDAOImpl dd = new DiaryDAOImpl();
-			request.setAttribute("list", dd.search());
+			int page=1;
+			if(request.getParameter("page")!=null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				if(page<1){
+					page=1;
+				}
+			}
+			request.setAttribute("list", dd.search(page));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 			dispatcher.forward(request, response);
 			

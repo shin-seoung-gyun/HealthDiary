@@ -5,7 +5,7 @@ public class DiaryListVO {// ���ڷ� �˻��ؼ� ���� ��
 	private String title;
 	private String contents;
 	private String date;
-	private String Condition;
+	private String conditions;
 	private int no;
 	
 	public int getNo() {
@@ -14,11 +14,11 @@ public class DiaryListVO {// ���ڷ� �˻��ؼ� ���� ��
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getCondition() {
-		return Condition;
+	public String getConditions() {
+		return conditions;
 	}
-	public void setCondition(String condition) {
-		Condition = condition;
+	public void setConditions(String conditions) {
+		this.conditions = conditions;
 	}
 	public String getDate() {
 		return date;

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface DiaryDAO {
 
-	List<DiaryListVO> search();//전체검색
+	List<DiaryListVO> search(int page);//전체검색
 	
 	DiaryListVO searchDateTime(DiaryListVO vo); //��¥,�ð��� �Է¹޾� �˻��ϴ� �ż���
 	

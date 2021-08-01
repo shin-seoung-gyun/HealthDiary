@@ -10,19 +10,21 @@ import java.util.List;
 public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 
 	@Override
-	public List<DiaryListVO> search() {// 전체 리스트 받기
+	public List<DiaryListVO> search(int page) {// 전체 리스트 받기
 		Connection conn = getConnection();// db연결
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 		ResultSet rs = null;// 결과값 받는 객체
 		List<DiaryListVO> volist = new ArrayList<DiaryListVO>();// 받아온 데이터를 담을 객체
 		try {
-			stmt = conn.prepareStatement("select * from diary");
+			stmt = conn.prepareStatement("select * from diary order by no desc limit ?,10");
+			stmt.setInt(1, (page-1)*10);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				DiaryListVO dvo = new DiaryListVO();
+				dvo.setNo(rs.getInt("no"));
 				dvo.setTitle(rs.getString("title"));
 				dvo.setDate(rs.getString("indate"));
-				dvo.setCondition(rs.getString("condition"));
+				dvo.setConditions(rs.getString("conditions"));
 				volist.add(dvo);
 			}
 
