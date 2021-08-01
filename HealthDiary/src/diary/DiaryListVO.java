@@ -6,7 +6,14 @@ public class DiaryListVO {// ���ڷ� �˻��ؼ� ���� ��
 	private String contents;
 	private String date;
 	private String Condition;
+	private int no;
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public String getCondition() {
 		return Condition;
 	}
