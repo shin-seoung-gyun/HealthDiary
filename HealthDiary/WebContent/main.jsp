@@ -41,9 +41,9 @@
         <div class="py-4 text-gray-500 dark:text-gray-400">
           <a
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-            href="#"
+            href="main.do"
           >
-            목차
+           EXERCISE DIARY
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -583,7 +583,7 @@
             <h2
               class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
             >
-              EXERCISE DIARY
+              <a href="main.do">EXERCISE DIARY</a>
             </h2>
             <!-- CTA -->
             <a
@@ -849,6 +849,8 @@
                           class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
                           aria-label="Next"
                         >
+                        <c:if test="${page.next }">
+						  <a href="main.do?page=${(page.endPage)+1}">
                           <svg
                             class="w-4 h-4 fill-current"
                             aria-hidden="true"
@@ -861,9 +863,25 @@
                               fill-rule="evenodd"
                             ></path>
                           </svg>
-                          <c:if test="${page.next }">
-						  <a href="main.do?page=${(page.endPage)+1}"> </a>
+                           </a>
 						  </c:if>
+						  
+						  <c:if test="${!page.next }">
+                          <svg
+                            class="w-4 h-4 fill-current"
+                            aria-hidden="true"
+                            viewBox="0 0 20 20"
+                          >
+                          
+                            <path
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd"
+                              fill-rule="evenodd"
+                            ></path>
+                          </svg>
+                          
+						  </c:if>
+						  
                         </button>
                       </li>
                     </ul>
