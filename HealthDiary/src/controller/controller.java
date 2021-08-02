@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import diary.DiaryDAOImpl;
 import diary.DiaryListVO;
+import diary.PageVO;
 
 @WebServlet("*.do")
 public class controller extends HttpServlet {
@@ -62,7 +63,12 @@ public class controller extends HttpServlet {
 					page=1;
 				}
 			}
+			PageVO pvo = new PageVO(page, dd.total());
+			
 			request.setAttribute("list", dd.search(page));
+			request.setAttribute("total", dd.total());
+			request.setAttribute("page", pvo);
+			System.out.println(pvo.getEndPage());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 			dispatcher.forward(request, response);
 			

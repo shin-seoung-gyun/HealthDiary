@@ -656,7 +656,7 @@
                   <p
                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                   >
-                    ####
+                    ${total.total} 개
                   </p>
                 </div>
               </div>
@@ -677,7 +677,7 @@
                   <p
                     class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
                   >
-                    식단 확인하기
+                    유사 운동, 운동법 찾기
                   </p>
                   <p
                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
@@ -781,7 +781,7 @@
                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
               >
                 <span class="flex items-center col-span-3">
-                  Showing 21-30 of 100
+                  Showing ${(page.page-1)*10+1}-${(page.page-1)*10+10} of ${total.total}
                 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
@@ -792,7 +792,22 @@
                         <button
                           class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
                           aria-label="Previous"
+                          
                         >
+                          <c:if test="${page.prev }">
+							<a href="main.do?page=${(page.startPage)-1}"><svg
+                            aria-hidden="true"
+                            class="w-4 h-4 fill-current"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                              clip-rule="evenodd"
+                              fill-rule="evenodd"
+                            ></path>
+                          </svg> </a>  
+						  </c:if>
+                          <c:if test="${!page.prev }">
                           <svg
                             aria-hidden="true"
                             class="w-4 h-4 fill-current"
@@ -804,53 +819,31 @@
                               fill-rule="evenodd"
                             ></path>
                           </svg>
+                        </c:if>
                         </button>
                       </li>
+                      
+                      <c:forEach begin="${page.startPage }" end="${page.endPage }" var="num">
+                      <c:if test="${page.page != num }">
                       <li>
                         <button
                           class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
                         >
-                          1
+                          <a href="main.do?page=${num}">${num}</a>
                         </button>
                       </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          2
-                        </button>
-                      </li>
+                      </c:if>
+                       <c:if test="${page.page == num }">
                       <li>
                         <button
                           class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple"
                         >
-                          3
+                          ${num}
                         </button>
                       </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          4
-                        </button>
-                      </li>
-                      <li>
-                        <span class="px-3 py-1">...</span>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          8
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          9
-                        </button>
-                      </li>
+                      </c:if>
+                      </c:forEach>
+                      
                       <li>
                         <button
                           class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
@@ -861,12 +854,16 @@
                             aria-hidden="true"
                             viewBox="0 0 20 20"
                           >
+                          
                             <path
                               d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                               clip-rule="evenodd"
                               fill-rule="evenodd"
                             ></path>
                           </svg>
+                          <c:if test="${page.next }">
+						  <a href="main.do?page=${(page.endPage)+1}"> </a>
+						  </c:if>
                         </button>
                       </li>
                     </ul>

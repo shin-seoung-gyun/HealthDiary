@@ -120,4 +120,25 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 		
 	}
 
+	@Override
+	public TotalVO total() {
+		Connection conn = getConnection();// db연결
+		PreparedStatement stmt = null; // 쿼리 보내는 객체
+		ResultSet rs = null;// 결과값 받는 객체
+		try {
+			stmt = conn.prepareStatement("select count(*) as total from diary");
+			rs = stmt.executeQuery();
+			TotalVO tvo = new TotalVO();
+			rs.next();
+			tvo.setTotal(rs.getInt("total"));
+			return tvo;
+		} catch (Exception e) {
+
+		} finally {
+			closeDBResources(rs, stmt, conn);
+		}
+		return null;
+	
+	}
+
 }

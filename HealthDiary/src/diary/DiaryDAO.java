@@ -14,6 +14,8 @@ public interface DiaryDAO {
 	
 	void insert(DiaryListVO vo);//����
 	
+	TotalVO total();//일기 총 갯수
+	
 }
 
 
