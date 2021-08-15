@@ -577,15 +577,15 @@
             <!-- CTA -->
             <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">운동명</span>
+                <form action="findexercise.do">
                 <input id="exname"
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="스쿼트"
+                  name = "exercisename"
                 />
-                <a href = "http://192.168.0.89:8082/exercise/"
-                <bottum
-                  class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                >
-                </bottum>
+                <input type="submit" value="찾기">
+                
+             	</form>
             </label>
             
             

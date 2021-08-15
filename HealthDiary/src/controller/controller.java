@@ -98,8 +98,12 @@ public class controller extends HttpServlet {
 			dd.update(vo);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("search2.do");
 			dispatcher.forward(request, response);
-		}else if (action.equals("real.do")) {//템플릿 테스트하는 매서드
-			response.sendRedirect("realindex.jsp");
+		}else if (action.equals("findexercise.do")) {//유사운동 찾는 jsp
+			String exercisename = request.getParameter("exercisename");
+			
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("exercise.jsp");
+			dispatcher.forward(request, response);
 			
 		}
 			
