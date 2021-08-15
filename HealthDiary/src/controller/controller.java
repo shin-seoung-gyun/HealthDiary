@@ -25,6 +25,7 @@ public class controller extends HttpServlet {
 
 	}
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doWork(request, response);
