@@ -583,7 +583,7 @@
                   placeholder="스쿼트"
                   name = "exercisename"
                 />
-                <input type="submit" value="찾기이지만 테스트좀">
+                <input type="submit" value="찾기이지만 테스트해야지 업로드가 안되">
                 
              	</form>
             </label>
