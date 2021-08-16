@@ -1,7 +1,7 @@
 package diary;
 
 
-public class DiaryListVO {// ���ڷ� �˻��ؼ� ���� ����� ����� ����, ���ڸ� �ű�� ������
+public class DiaryListVO {// 
 	private String title;
 	private String contents;
 	private String date;
