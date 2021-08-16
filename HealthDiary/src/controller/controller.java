@@ -1,7 +1,12 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.ProcessBuilder.Redirect;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +17,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 import diary.DiaryDAOImpl;
 import diary.DiaryListVO;
+import diary.NameVO;
 import diary.PageVO;
 
 @WebServlet("*.do")
@@ -96,8 +104,34 @@ public class controller extends HttpServlet {
 			dd.update(vo);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("search2.do");
 			dispatcher.forward(request, response);
-		}else if (action.equals("findexercise.do")) {//유사운동 찾는 jsp
-			String exercisename = request.getParameter("exercisename");
+		}else if (action.equals("findexercise.do")) {//유사운동 찾는 jsp 외부 restapi사용
+//			request.setCharacterEncoding("utf-8");
+//	        response.setContentType("text/html; charset=utf-8");
+//			String exercisename = request.getParameter("exercisename");
+//			String addr = "http://192.168.0.89:8082/exercise/";
+//			addr = addr + exercisename;
+//			URL url = new URL(addr);
+//			 
+//		        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//		        con.setRequestMethod("GET"); //기본적으로 조회 시 사용되는 GET
+//
+//		        int status = con.getResponseCode();
+//		        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//		        List<NameVO> nameList = new ArrayList<NameVO>();
+//		        NameVO nvo = new NameVO();
+//		        String re;
+//		        
+//		        while((re = in.readLine()) != null) 
+//		        	nvo.setName(re);
+//		        	nameList.add(nvo);
+//		        
+//		        in.close();
+//		        con.disconnect();
+//		        
+//		        System.out.println("Response status: " + status);
+//		        System.out.println(nameList.toString());
+	        
+	        
 			
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("exercise.jsp");
