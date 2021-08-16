@@ -22,9 +22,7 @@ public class controller extends HttpServlet {
 
 	public controller() {
 		super();
-
 	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doWork(request, response);
