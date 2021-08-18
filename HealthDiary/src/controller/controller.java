@@ -80,10 +80,13 @@ public class controller extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 			dispatcher.forward(request, response);
 
-		} else if (action.equals("search2.do")) {// 날자 시간으로 내용까지 가져오기-수정 예정
+		} else if (action.equals("search2.do")) {// 일기번호로 내용까지 가져오기-수정 예정
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			DiaryListVO vo = new DiaryListVO();
-
+			int a = Integer.parseInt(request.getParameter("no"));
+			System.out.println(a);
+			vo.setNo(a);
+			
 			request.setAttribute("list", dd.searchDateTime(vo));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("search2.jsp");
 			dispatcher.forward(request, response);
