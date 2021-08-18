@@ -682,7 +682,7 @@
                   <p
                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                   >
-                    바로가기##
+                    <a href="exercise.do">바로가기</a>
                   </p>
                 </div>
               </div>
