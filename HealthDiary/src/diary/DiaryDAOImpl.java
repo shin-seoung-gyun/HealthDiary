@@ -38,19 +38,21 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 	}
 
 	@Override
-	public DiaryListVO searchDateTime(DiaryListVO vo) {// 날자 시간으로 일기 내용까지 받기
+	public DiaryListVO searchDateTime(DiaryListVO vo) {// 일기 번호로 일기 내용까지 받기
 		Connection conn = getConnection();// db연결
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 		ResultSet rs = null;// 결과값 받는 객체
 		DiaryListVO dvo = new DiaryListVO();
 		try {
-			stmt = conn.prepareStatement("select * from diary where indate = ?");
-//			stmt.setDate(1, vo.getDate()); 날짜가 아닌 번호나 다른 것으로 검색하게 수정할 예정
+			stmt = conn.prepareStatement("select * from diary where no = ?");
+			stmt.setInt(1, vo.getNo()); //날짜가 아닌 번호나 다른 것으로 검색하게 수정할 예정
 			rs = stmt.executeQuery();
 			rs.next();
+			dvo.setNo(rs.getInt("no"));
 			dvo.setTitle(rs.getString("title"));
 			dvo.setContents(rs.getString("contents"));
 			dvo.setDate(rs.getString("indate"));
+			dvo.setConditions(rs.getString("conditions"));
 
 			return dvo;
 		} catch (Exception e) {

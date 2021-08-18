@@ -752,13 +752,12 @@
                           <!-- Avatar with inset shadow -->
                           
                           <div>
-                            <p class="font-semibold">${ temp.getTitle() }</p>
-                            
+                            <p class="font-semibold"><a href="search2.do?no=${ temp.getNo() }" > ${ temp.getTitle() } </a></p>
                           </div>
                         </div>
                       </td>
                       <td class="px-4 py-3 text-sm">
-                        여기에 작성자
+                       	 여기에 작성자
                       </td>
                       <td class="px-4 py-3 text-xs">
                         <span
