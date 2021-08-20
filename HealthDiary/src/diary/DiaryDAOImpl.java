@@ -25,6 +25,7 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 				dvo.setTitle(rs.getString("title"));
 				dvo.setDate(rs.getString("indate"));
 				dvo.setConditions(rs.getString("conditions"));
+				dvo.setExerciseVolume(rs.getInt("exercisevolume"));
 				volist.add(dvo);
 			}
 
@@ -53,6 +54,7 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 			dvo.setContents(rs.getString("contents"));
 			dvo.setDate(rs.getString("indate"));
 			dvo.setConditions(rs.getString("conditions"));
+			dvo.setExerciseVolume(rs.getInt("exercisevolume"));
 
 			return dvo;
 		} catch (Exception e) {
@@ -69,10 +71,11 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 
 		try {
-			stmt = conn.prepareStatement("UPDATE DIARY SET TITLE = ?, CONTENTS = ? WHERE ??");//수정예정
+			stmt = conn.prepareStatement("UPDATE DIARY SET TITLE = ?, CONTENTS = ? WHERE no = ?");//수정예정
 			
 			stmt.setString(1, vo.getTitle());
 			stmt.setString(2, vo.getContents());
+			stmt.setInt(3, vo.getNo());
 			stmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -89,8 +92,8 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 
 		try {
-			stmt = conn.prepareStatement("delete from diary where indate=?");//여기도 수정
-//			stmt.setDate(1, vo.getDate()); 번호로 삭제할 예정
+			stmt = conn.prepareStatement("delete from diary where no=?");//번호로 삭제
+			stmt.setInt(1, vo.getNo()); 
 
 			stmt.executeUpdate();
 
@@ -103,15 +106,16 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 
 	@Override
 	public void insert(DiaryListVO vo) {//일기 새로 등록하는 매서드
-		// TODO Auto-generated method stub
-
+		
 		Connection conn = getConnection();// db연결
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 
 		try {
-			stmt = conn.prepareStatement("INSERT INTO diary (`TITLE`,`CONTENTS`) VALUES (?,?)");
+			stmt = conn.prepareStatement("INSERT INTO diary (`TITLE`,`CONTENTS`,`conditions`,`exercisevolume`) VALUES (?,?,?,?)");//등록
 			stmt.setString(1, vo.getTitle());
 			stmt.setString(2, vo.getContents());
+			stmt.setString(3, vo.getConditions());
+			stmt.setInt(4, vo.getExerciseVolume());
 			stmt.executeUpdate();
 
 		} catch (Exception e) {

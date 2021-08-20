@@ -6,6 +6,14 @@ public class DiaryListVO {//
 	private String contents;
 	private String date;
 	private String conditions;
+	private int exerciseVolume;
+	
+	public int getExerciseVolume() {
+		return exerciseVolume;
+	}
+	public void setExerciseVolume(int exerciseVolume) {
+		this.exerciseVolume = exerciseVolume;
+	}
 	private int no;
 	
 	public int getNo() {
