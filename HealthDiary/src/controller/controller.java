@@ -51,7 +51,7 @@ public class controller extends HttpServlet {
 		System.out.println("요청action은:" + action);
 		request.setCharacterEncoding("utf-8");
 
-		if (action.equals("write.do")) {// 일기 등록 수정중
+		if (action.equals("write.do")) {// 일기 등록 수정중 !! 여기 수정해야함
 			// 전송된 값 읽기 등록
 			DiaryListVO vo = new DiaryListVO();
 			vo.setTitle(request.getParameter("title"));
