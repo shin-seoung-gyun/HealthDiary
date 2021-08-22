@@ -39,7 +39,7 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 	}
 
 	@Override
-	public DiaryListVO searchDateTime(DiaryListVO vo) {// 일기 번호로 일기 내용까지 받기
+	public DiaryListVO searchNoList(DiaryListVO vo) {// 일기 번호로 일기 내용까지 받기
 		Connection conn = getConnection();// db연결
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 		ResultSet rs = null;// 결과값 받는 객체
@@ -71,11 +71,13 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 
 		try {
-			stmt = conn.prepareStatement("UPDATE DIARY SET TITLE = ?, CONTENTS = ? WHERE no = ?");//수정예정
-			
+			stmt = conn.prepareStatement("UPDATE DIARY SET TITLE = ?, CONTENTS = ?,exercisevolume=?, conditions=?,indate=? WHERE no = ?");//수정예정
 			stmt.setString(1, vo.getTitle());
 			stmt.setString(2, vo.getContents());
-			stmt.setInt(3, vo.getNo());
+			stmt.setInt(3, vo.getExerciseVolume());
+			stmt.setString(4, vo.getConditions());
+			stmt.setString(5, vo.getDate());
+			stmt.setInt(6, vo.getNo());
 			stmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -117,6 +119,7 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 			stmt.setString(3, vo.getConditions());
 			stmt.setInt(4, vo.getExerciseVolume());
 			stmt.executeUpdate();
+			System.out.println("업로드완료");
 
 		} catch (Exception e) {
 

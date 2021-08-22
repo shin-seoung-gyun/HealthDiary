@@ -2,14 +2,12 @@ package controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.ProcessBuilder.Redirect;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
+
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,19 +49,24 @@ public class controller extends HttpServlet {
 		System.out.println("요청action은:" + action);
 		request.setCharacterEncoding("utf-8");
 
-		if (action.equals("write.do")) {// 일기 등록 수정중 !! 여기 수정해야함
+		if (action.equals("write.do")) {// 일기 등록
 			// 전송된 값 읽기 등록
 			DiaryListVO vo = new DiaryListVO();
 			vo.setTitle(request.getParameter("title"));
 			vo.setContents(request.getParameter("contents"));
 			vo.setConditions(request.getParameter("conditions"));
+			vo.setExerciseVolume(Integer.parseInt(request.getParameter("exercisevolume")));
+			
 			// 등록
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			dd.insert(vo);
 			// 다시 등록화면
+			response.sendRedirect("main.do");
+		} else if (action.equals("diary.do")) {
+			
 			response.sendRedirect("diary.jsp");
-
-		} else if (action.equals("main.do")) {// 일기 리스트 가져오기
+			
+		} else if (action.equals("main.do")) {//일기 리스트 가져오기
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			int page = 1;
 			if (request.getParameter("page") != null) {
@@ -88,22 +91,26 @@ public class controller extends HttpServlet {
 			System.out.println(a);
 			vo.setNo(a);
 			
-			request.setAttribute("list", dd.searchDateTime(vo));
+			request.setAttribute("list", dd.searchNoList(vo));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("search2.jsp");
 			dispatcher.forward(request, response);
 
-		} else if (action.equals("delete.do")) {// 삭제하기-수정예정
+		} else if (action.equals("delete.do")) {// 삭제하기
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			DiaryListVO vo = new DiaryListVO();
+			vo.setNo(Integer.parseInt(request.getParameter("no")));
 
 			dd.delete(vo);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("search.jsp");
 			dispatcher.forward(request, response);
-		} else if (action.equals("update.do")) {// 수정하는 매서드 - 수정예정
+		} else if (action.equals("update.do")) {// 수정하는 매서드
 			DiaryListVO vo = new DiaryListVO();
 			vo.setTitle(request.getParameter("title"));
-
+			vo.setExerciseVolume(Integer.parseInt(request.getParameter("exercisevolume")));
 			vo.setContents(request.getParameter("contents"));
+			vo.setConditions(request.getParameter("conditions"));
+			vo.setNo(Integer.parseInt(request.getParameter("no")));
+			vo.setDate(request.getParameter("date"));
 			System.out.println(vo.getDate());
 			// 등록
 			DiaryDAOImpl dd = new DiaryDAOImpl();

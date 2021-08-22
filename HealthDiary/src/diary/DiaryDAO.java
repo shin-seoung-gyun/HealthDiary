@@ -6,7 +6,7 @@ public interface DiaryDAO {
 
 	List<DiaryListVO> search(int page);//전체검색
 	
-	DiaryListVO searchDateTime(DiaryListVO vo); //��¥,�ð��� �Է¹޾� �˻��ϴ� �ż���
+	DiaryListVO searchNoList(DiaryListVO vo); //��¥,�ð��� �Է¹޾� �˻��ϴ� �ż���
 	
 	void update(DiaryListVO vo);//�˻��� �� ������ ������ db�� ������ �ż���
 	
