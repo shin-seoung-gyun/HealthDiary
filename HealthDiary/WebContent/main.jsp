@@ -408,7 +408,7 @@
                   <p
                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                   >
-                    바로가기 ##
+                   <a href="diary.do">바로가기</a>
                   </p>
                 </div>
               </div>
@@ -447,7 +447,7 @@
                         <div class="flex items-center text-sm">
                           <!-- Avatar with inset shadow -->
                           <div>
-                            <p class="font-semibold"><a href="search2.do?no=${ temp.getNo() }" > ${ temp.getTitle() } </a></p>
+                            <p class="font-semibold"><a href="search.do?no=${ temp.getNo() }" > ${ temp.getTitle() } </a></p>
                           </div>
                         </div>
                       </td>

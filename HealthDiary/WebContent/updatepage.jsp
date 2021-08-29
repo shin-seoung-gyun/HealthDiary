@@ -62,10 +62,7 @@
           </ul>
           <ul>
             <li class="relative px-6 py-3">
-            <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
+            
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="diary.do"
@@ -247,11 +244,13 @@
             <h2
               class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
             >
-              일기 작성
+              일기 수정
             </h2>
             <!-- CTA -->
             <!-- General elements -->
-            <form action="write.do">
+            <form action="update.do">
+            <input type="hidden" name="no" value="${list.getNo() }" />
+            <input type="hidden" name="date" value="${list.getDate() }" />
             <div
               class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
             >
@@ -260,7 +259,7 @@
                 <input
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   name = "title"
-                  placeholder="제목을 입력하세요"
+                  placeholder="수정할 제목을 입력하세요"
                 />
               </label>
 
@@ -313,7 +312,7 @@
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   name = "exercisevolume"
                   type = "number"
-                  placeholder="운동량을 입력하세요"
+                  placeholder="수정할 운동량을 입력하세요"
                 />
               
               </label>
@@ -324,7 +323,7 @@
                   class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                   rows="20"
                   name = "contents"
-                  placeholder="일기내용을 적으세요"
+                  placeholder="수정할 일기내용을 적으세요"
                 ></textarea>
               </label>
 
@@ -333,7 +332,7 @@
             <button type = "submit"
                   class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 >
-                  등록
+                  수정등록
                 </button>
                 </div>
                 </form>

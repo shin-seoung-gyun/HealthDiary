@@ -84,7 +84,7 @@ public class controller extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 			dispatcher.forward(request, response);
 
-		} else if (action.equals("search2.do")) {// 일기번호로 내용까지 가져오기-수정 예정
+		} else if (action.equals("search.do")) {// 일기번호로 내용까지 가져오기-수정 예정
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			DiaryListVO vo = new DiaryListVO();
 			int a = Integer.parseInt(request.getParameter("no"));
@@ -92,7 +92,7 @@ public class controller extends HttpServlet {
 			vo.setNo(a);
 			
 			request.setAttribute("list", dd.searchNoList(vo));
-			RequestDispatcher dispatcher = request.getRequestDispatcher("search2.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("search.jsp");
 			dispatcher.forward(request, response);
 
 		} else if (action.equals("delete.do")) {// 삭제하기
@@ -101,7 +101,7 @@ public class controller extends HttpServlet {
 			vo.setNo(Integer.parseInt(request.getParameter("no")));
 
 			dd.delete(vo);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("search.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("main.do");
 			dispatcher.forward(request, response);
 		} else if (action.equals("update.do")) {// 수정하는 매서드
 			DiaryListVO vo = new DiaryListVO();
@@ -115,8 +115,17 @@ public class controller extends HttpServlet {
 			// 등록
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			dd.update(vo);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("search2.do");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("main.do");
 			dispatcher.forward(request, response);
+		} else if (action.equals("updatepage.do")) {
+			DiaryListVO vo = new DiaryListVO();
+			vo.setNo(Integer.parseInt(request.getParameter("no")));
+			vo.setDate(request.getParameter("date"));
+			
+			request.setAttribute("list", vo);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("updatepage.jsp");
+			dispatcher.forward(request, response);
+		
 		} else if (action.equals("exercise.do")) {// 유사운동 찾는 페이지 바로열기
 
 			response.sendRedirect("exercise.jsp");

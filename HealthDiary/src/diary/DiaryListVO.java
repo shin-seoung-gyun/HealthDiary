@@ -7,6 +7,7 @@ public class DiaryListVO {//
 	private String date;
 	private String conditions;
 	private int exerciseVolume;
+	private int no;
 	
 	public int getExerciseVolume() {
 		return exerciseVolume;
@@ -14,7 +15,7 @@ public class DiaryListVO {//
 	public void setExerciseVolume(int exerciseVolume) {
 		this.exerciseVolume = exerciseVolume;
 	}
-	private int no;
+	
 	
 	public int getNo() {
 		return no;
