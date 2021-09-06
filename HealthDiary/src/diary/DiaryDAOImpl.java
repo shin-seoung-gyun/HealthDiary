@@ -150,4 +150,100 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 	
 	}
 
+	@Override
+	public TotalVO exerciseTotal() {
+		Connection conn = getConnection();// db연결
+		PreparedStatement stmt = null; // 쿼리 보내는 객체
+		ResultSet rs = null;// 결과값 받는 객체
+		try {
+			stmt = conn.prepareStatement("select sum(exercisevolume) as exercisetotal from diary");
+			rs = stmt.executeQuery();
+			TotalVO tvo = new TotalVO();
+			rs.next();
+			tvo.setExerciseTotal(rs.getInt("exercisetotal"));
+			return tvo;
+		} catch (Exception e) {
+
+		} finally {
+			closeDBResources(rs, stmt, conn);
+		}
+		
+		return null;
+	}
+
+	@Override
+	public List<ExerciseVO> exerciseList(int page) {
+		
+		Connection conn = getConnection();// db연결
+		PreparedStatement stmt = null; // 쿼리 보내는 객체
+		ResultSet rs = null;// 결과값 받는 객체
+		List<ExerciseVO> exlist = new ArrayList<ExerciseVO>();// 받아온 데이터를 담을 객체
+		try {
+			stmt = conn.prepareStatement("select * from exercise order by eno limit ?,10");
+			stmt.setInt(1, (page-1)*10);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				ExerciseVO evo = new ExerciseVO();
+				evo.setEno(rs.getInt("eno"));
+				evo.setEmethod(rs.getString("emethod"));
+				evo.setEname(rs.getString("ename"));
+				
+				exlist.add(evo);
+			}
+
+			return exlist;
+		} catch (Exception e) {
+
+		} finally {
+			closeDBResources(rs, stmt, conn);
+		}
+		return null;
+	
+	}
+
+	@Override
+	public TotalVO exerciseListTotal() {
+		Connection conn = getConnection();// db연결
+		PreparedStatement stmt = null; // 쿼리 보내는 객체
+		ResultSet rs = null;// 결과값 받는 객체
+		try {
+			stmt = conn.prepareStatement("select count(*) as exlistcnt from exercise");
+			rs = stmt.executeQuery();
+			TotalVO tvo = new TotalVO();
+			rs.next();
+			tvo.setExercistListTotal(rs.getInt("exlistcnt"));
+			return tvo;
+		} catch (Exception e) {
+
+		} finally {
+			closeDBResources(rs, stmt, conn);
+		}
+		return null;
+	}
+
+	@Override
+	public ExerciseVO searchExercise(String exname) {
+		Connection conn = getConnection();// db연결
+		PreparedStatement stmt = null; // 쿼리 보내는 객체
+		ResultSet rs = null;// 결과값 받는 객체
+		ExerciseVO evo = new ExerciseVO();
+		try {
+			stmt = conn.prepareStatement("select * from exercise where ename = ?");
+			stmt.setString(1, exname); //날짜가 아닌 번호나 다른 것으로 검색하게 수정할 예정
+			rs = stmt.executeQuery();
+			rs.next();
+			evo.setEno(rs.getInt("eno"));
+			evo.setEmethod(rs.getString("emethod"));
+			evo.setEname(rs.getString("ename"));
+			
+			return evo;
+		} catch (Exception e) {
+
+		} finally {
+			closeDBResources(rs, stmt, conn);
+		}
+		
+		return null;
+	}
+
 }

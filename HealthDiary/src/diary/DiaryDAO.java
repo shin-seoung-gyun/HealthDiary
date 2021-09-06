@@ -16,6 +16,15 @@ public interface DiaryDAO {
 	
 	TotalVO total();//일기 총 갯수
 	
+	TotalVO exerciseTotal();//운동량 총 수
+	
+	TotalVO exerciseListTotal();//운동총 수
+	
+	List<ExerciseVO> exerciseList(int page);//전체검색
+	
+	ExerciseVO searchExercise(String exname);
+	
+	
 }
 
 

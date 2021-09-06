@@ -79,6 +79,7 @@ public class controller extends HttpServlet {
 
 			request.setAttribute("list", dd.search(page));
 			request.setAttribute("total", dd.total());
+			request.setAttribute("extotal", dd.exerciseTotal());
 			request.setAttribute("page", pvo);
 			System.out.println(pvo.getEndPage());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
@@ -126,43 +127,67 @@ public class controller extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("updatepage.jsp");
 			dispatcher.forward(request, response);
 		
-		} else if (action.equals("exercise.do")) {// 유사운동 찾는 페이지 바로열기
+		}  else if (action.equals("findexercise.do")) {// 유사운동 찾는 jsp 외부 restapi사용
+			if(request.getParameter("exercisename")!=null) {
+				request.setCharacterEncoding("utf-8");
+				response.setContentType("text/html; charset=utf-8");
+				
+				String exercisename = request.getParameter("exercisename");// url인코딩해야함
+				String exName = URLEncoder.encode(exercisename, "UTF-8").replace("+", "%20");
+				System.out.println(exName);
+				String addr = "http://192.168.0.89:8082/exercise/";
+				addr = addr + exName;
+				URL url = new URL(addr);
 
-			response.sendRedirect("exercise.jsp");
-		} else if (action.equals("findexercise.do")) {// 유사운동 찾는 jsp 외부 restapi사용
-			request.setCharacterEncoding("utf-8");
-			response.setContentType("text/html; charset=utf-8");
-			String exercisename = request.getParameter("exercisename");// url인코딩해야함
-			String exName = URLEncoder.encode(exercisename, "UTF-8");
-			String addr = "http://192.168.0.89:8082/exercise/";
-			addr = addr + exName;
-			URL url = new URL(addr);
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setRequestMethod("GET"); // 기본적으로 조회 시 사용되는 GET
 
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setRequestMethod("GET"); // 기본적으로 조회 시 사용되는 GET
-
-			int status = con.getResponseCode();
-			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			
-			Gson gson = new Gson();
-			
-			String re = in.readLine();
-			System.out.println(re);
-			NameVO[] nvo  =gson.fromJson(re, NameVO[].class);
-			
-			for(NameVO temp: nvo) {
-				System.out.println("받아온값"+temp);
+				int status = con.getResponseCode();
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				
+				Gson gson = new Gson();
+				
+				String re = in.readLine();
+				System.out.println(re);
+				NameVO[] nvo  =gson.fromJson(re, NameVO[].class);
+				
+				for(NameVO temp: nvo) {
+					System.out.println("받아온값"+temp);
+				}
+				
+				in.close();
+				con.disconnect();
+				
+				System.out.println("Response status: " + status);
+				
+				request.setAttribute("nvo", nvo);
+			} 
+			DiaryDAOImpl dd = new DiaryDAOImpl();
+			int page = 1;
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				if (page < 1) {
+					page = 1;
+				}
 			}
 			
-			in.close();
-			con.disconnect();
-			
-			System.out.println("Response status: " + status);
-			
-			request.setAttribute("nvo", nvo);
+			PageVO pvo = new PageVO(page, dd.exerciseListTotal());
+			System.out.println("페이지 관련 데이터"+pvo);
+			System.out.println("가져온 데이터 개수"+dd.exerciseListTotal());
+			request.setAttribute("exlist", dd.exerciseList(page));
+			request.setAttribute("page", pvo);
+			request.setAttribute("total", dd.exerciseListTotal());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("exercise.jsp");
 			dispatcher.forward(request, response);
 
+		} else if (action.equals("searchexercise.do")) {
+			DiaryDAOImpl dd = new DiaryDAOImpl();
+			String exname = request.getParameter("exname");
+//			exname = exname.replace("%20", " ");
+			request.setAttribute("exercise", dd.searchExercise(exname));
+			System.out.println(dd.searchExercise(exname));
+			RequestDispatcher dispatcher = request.getRequestDispatcher("searchexercise.jsp");
+			dispatcher.forward(request, response);
 		}
 
 	}
