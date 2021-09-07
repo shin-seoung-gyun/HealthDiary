@@ -183,7 +183,6 @@ public class controller extends HttpServlet {
 		} else if (action.equals("searchexercise.do")) {
 			DiaryDAOImpl dd = new DiaryDAOImpl();
 			String exname = request.getParameter("exname");
-//			exname = exname.replace("%20", " ");
 			request.setAttribute("exercise", dd.searchExercise(exname));
 			System.out.println(dd.searchExercise(exname));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("searchexercise.jsp");
