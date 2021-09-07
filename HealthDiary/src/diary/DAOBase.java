@@ -12,7 +12,7 @@ public class DAOBase implements DAO {
 		String db_url = "jdbc:mariadb://localhost:3306/healthdiary";
 		try {
 			Class.forName(jdbc_driver);
-			Connection conn = DriverManager.getConnection(db_url, "healthdiary", "1234");
+			Connection conn = DriverManager.getConnection(db_url, "healthdiary", "healthdiary");//배포용  일반용은 1234
 			System.out.println("연결됨");
 			return conn;
 		} catch (Exception e) {

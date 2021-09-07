@@ -135,7 +135,7 @@ public class controller extends HttpServlet {
 				String exercisename = request.getParameter("exercisename");// url인코딩해야함
 				String exName = URLEncoder.encode(exercisename, "UTF-8").replace("+", "%20");
 				System.out.println(exName);
-				String addr = "http://192.168.0.89:8082/exercise/";
+				String addr = "http://127.0.0.1:5000/exercise/";//배포용
 				addr = addr + exName;
 				URL url = new URL(addr);
 
