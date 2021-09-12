@@ -71,7 +71,7 @@ public class DiaryDAOImpl extends DAOBase implements DiaryDAO {
 		PreparedStatement stmt = null; // 쿼리 보내는 객체
 
 		try {
-			stmt = conn.prepareStatement("UPDATE DIARY SET TITLE = ?, CONTENTS = ?,exercisevolume=?, conditions=?,indate=? WHERE no = ?");//수정예정
+			stmt = conn.prepareStatement("UPDATE diary SET TITLE = ?, CONTENTS = ?,exercisevolume=?, conditions=?,indate=? WHERE no = ?");//수정예정
 			stmt.setString(1, vo.getTitle());
 			stmt.setString(2, vo.getContents());
 			stmt.setInt(3, vo.getExerciseVolume());
